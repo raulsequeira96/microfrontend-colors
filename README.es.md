@@ -319,15 +319,6 @@ El proyecto está configurado con HMR para una experiencia de desarrollo fluida:
 - El estado de la aplicación se preserva entre cambios
 - No es necesario refrescar el navegador manualmente
 
-## 📄 Licencia
-
-Distribuido bajo la licencia MIT. Ver `LICENSE` para más información.
-
-## 👥 Autor
-
-**Jack Herrington**
-- Email: jherr@pobox.com
-
 ---
 
 ⭐️ Si este proyecto te ayudó a aprender sobre microfrontends, considera darle una estrella!
