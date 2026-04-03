@@ -47,28 +47,44 @@ body {
  * Shows a purple border and badge to distinguish from host components
  */
 .remote-component {
-  border: 3px solid var(--remote-color);
+  border: 4px solid var(--remote-color);
   border-radius: 12px;
   padding: 1.5rem;
   position: relative;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf7ff 100%);
   transition: var(--transition-medium);
+  box-shadow: 0 0 0 4px rgba(155, 89, 182, 0.15);
 }
 
 /* Badge showing "🔵 Remote" */
 .remote-component::before {
-  content: "🔵 Remote Component";
+  content: "MF REMOTO";
   position: absolute;
-  top: -14px;
-  right: 15px;
+  top: -16px;
+  left: 15px;
   background: var(--remote-color);
   color: white;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 6px;
   font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  box-shadow: var(--shadow-light);
+}
+
+.remote-component::after {
+  content: "expuesto por webpack module federation";
+  position: absolute;
+  top: -16px;
+  right: 15px;
+  background: #5c2d91;
+  color: #efe8ff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.5px;
-  box-shadow: var(--shadow-light);
+  text-transform: uppercase;
 }
 
 /* Hide boundaries when body has .hide-boundaries class (toggle feature) */
@@ -298,6 +314,10 @@ body.hide-boundaries .remote-component::before {
   .remote-component::before {
     font-size: 0.7rem;
     padding: 3px 8px;
+  }
+
+  .remote-component::after {
+    display: none;
   }
 }
 

@@ -86,25 +86,44 @@ const App = () => {
         </p>
       </div>
 
+      <div className="container">
+        <div className="origin-legend" role="status" aria-label="Leyenda de origen de componentes">
+          <span className="origin-chip origin-chip-host">HOST APP (PUERTO 3000)</span>
+          <span className="origin-chip origin-chip-remote">MICROFRONTEND REMOTO (PUERTO 3001)</span>
+        </div>
+      </div>
+
       {/* Contenido Principal - Layout de Dos Columnas */}
       <div className="container main-container mt-4">
         <div className="row g-4">
           {/* Columna Izquierda: Lista de Colores Guardados (Componente Host) */}
           <div className="col-12 col-lg-4">
-            <ColorList
-              colors={savedColors}
-              onDelete={handleColorDelete}
-              onClearAll={handleClearAll}
-            />
+            <section className="component-zone host-zone" aria-label="Zona de componentes del host">
+              <div className="zone-header">
+                <span className="zone-header-dot" />
+                Componente local del host
+              </div>
+              <ColorList
+                colors={savedColors}
+                onDelete={handleColorDelete}
+                onClearAll={handleClearAll}
+              />
+            </section>
           </div>
 
           {/* Columna Derecha: ColorPicker (Componente Remoto del Microfrontend) */}
           <div className="col-12 col-lg-8">
-            <ColorPicker
-              onColorSelect={handleColorSave}
-              initialColor="#3498db"
-              showSaveButton={true}
-            />
+            <section className="component-zone remote-zone" aria-label="Zona de componentes del microfrontend remoto">
+              <div className="zone-header">
+                <span className="zone-header-dot" />
+                Componente cargado desde microfrontend remoto
+              </div>
+              <ColorPicker
+                onColorSelect={handleColorSave}
+                initialColor="#3498db"
+                showSaveButton={true}
+              />
+            </section>
           </div>
         </div>
       </div>

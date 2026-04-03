@@ -87,31 +87,120 @@ body {
   margin-right: auto;
 }
 
+.origin-legend {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.origin-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+
+.origin-chip-host {
+  background: linear-gradient(135deg, #16a085 0%, #0f7a66 100%);
+}
+
+.origin-chip-remote {
+  background: linear-gradient(135deg, #9b59b6 0%, #6f42c1 100%);
+}
+
+.component-zone {
+  border-radius: 14px;
+  padding: 0.75rem;
+  border: 3px solid transparent;
+}
+
+.zone-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem 0.25rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+}
+
+.zone-header-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.host-zone {
+  border-color: #16a085;
+  background: linear-gradient(180deg, rgba(22, 160, 133, 0.14) 0%, rgba(22, 160, 133, 0.02) 100%);
+}
+
+.host-zone .zone-header {
+  background: #16a085;
+  color: white;
+}
+
+.host-zone .zone-header-dot {
+  background: #b8fff0;
+}
+
+.remote-zone {
+  border-color: #9b59b6;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(155, 89, 182, 0.1),
+    rgba(155, 89, 182, 0.1) 12px,
+    rgba(155, 89, 182, 0.04) 12px,
+    rgba(155, 89, 182, 0.04) 24px
+  );
+}
+
+.remote-zone .zone-header {
+  background: #9b59b6;
+  color: white;
+}
+
+.remote-zone .zone-header-dot {
+  background: #f2d9ff;
+}
+
 /* ========================================
    Host Component Boundary Indicator
    ======================================== */
 
 .host-component {
-  border: 2px dashed var(--host);
+  border: 3px dashed var(--host);
   border-radius: 12px;
   padding: 1.5rem;
   position: relative;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fffc 100%);
   transition: var(--transition);
 }
 
 .host-component::before {
-  content: "🟢 Host Component";
+  content: "HOST COMPONENT";
   position: absolute;
   top: -14px;
   right: 15px;
   background: var(--host);
   color: white;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 6px;
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -676,6 +765,14 @@ body.hide-boundaries .remote-component::before {
 
   .app-subtitle {
     font-size: 1rem;
+  }
+
+  .origin-legend {
+    justify-content: flex-start;
+  }
+
+  .origin-chip {
+    font-size: 0.72rem;
   }
 
   .main-container {

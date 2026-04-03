@@ -72,7 +72,7 @@ const ColorList = ({ colors, onDelete, onClearAll }) => {
   // Estado vacío - mostrar cuando no hay colores guardados
   if (colors.length === 0) {
     return (
-      <div className="color-list-container host-component">
+      <div className="color-list-container">
         <h4 className="list-title">
           <span className="title-icon">📋</span>
           Lista de Colores
