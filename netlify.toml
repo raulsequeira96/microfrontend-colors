@@ -1,0 +1,46 @@
+# Configuración de Netlify - HOST
+
+[build]
+command = "cd host && npm install && npm run build"
+publish = "host/dist"
+
+[[headers]]
+# Aplicar a todos los recursos
+for = "/*"
+
+  [headers.values]
+  # Permitir solicitudes desde cualquier origen (CORS abierto)
+  Access-Control-Allow-Origin = "*"
+  
+  # Permitir todos los métodos HTTP
+  Access-Control-Allow-Methods = "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS"
+  
+  # Permitir todos los headers en solicitudes CORS
+  Access-Control-Allow-Headers = "*"
+  
+  # Permitir credenciales si es necesario
+  Access-Control-Allow-Credentials = "true"
+  
+  # Tiempo de caché para preflight requests
+  Access-Control-Max-Age = "86400"
+  
+  # Headers de seguridad básica (relajados)
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options = "SAMEORIGIN"
+  X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+# Headers específicos para JavaScript
+for = "/*.js"
+
+  [headers.values]
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "GET, HEAD, OPTIONS"
+  Access-Control-Allow-Headers = "*"
+  Content-Type = "application/javascript; charset=utf-8"
+
+[[redirects]]
+# Redirigir todas las rutas a index.html para soporte de SPA
+from = "/*"
+to = "/index.html"
+status = 200

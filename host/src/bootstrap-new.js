@@ -1,7 +1,6 @@
+// Actualizar el bootstrap.js para usar la utilidad de debug
+
 import { setupFederationErrorHandler } from "./utils/federationDebug";
-import { createRoot } from "react-dom/client";
-import App from "./components/App";
-import "./index.css";
 
 // Configurar manejo de errores de federación
 setupFederationErrorHandler();
@@ -13,9 +12,4 @@ console.log(
   process.env.COLORPICKER_URL || "https://colorpicker-mf-colors-app.netlify.app/remoteEntry.js"
 );
 
-const container = document.getElementById("app");
-
-if (container) {
-  const root = createRoot(container);
-  root.render(<App />);
-}
+import("./index");

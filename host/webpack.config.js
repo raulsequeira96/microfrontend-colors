@@ -12,9 +12,20 @@
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+require("dotenv").config({ path: ".env.local" });
 
 // Cargar dependencias desde package.json para manejo de versiones
 const deps = require("./package.json").dependencies;
+
+// Configuración de URLs basada en el ambiente
+const isDevelopment = process.env.NODE_ENV !== "production";
+const colorPickerUrl = process.env.COLORPICKER_URL ||
+  (isDevelopment 
+    ? "http://localhost:3001/remoteEntry.js" 
+    : "https://colorpicker-mf-colors-app.netlify.app/remoteEntry.js");
+
+console.log(`[HOST WEBPACK] Ambiente: ${isDevelopment ? "DESARROLLO" : "PRODUCCIÓN"}`);
+console.log(`[HOST WEBPACK] ColorPicker URL: ${colorPickerUrl}`);
 
 module.exports = {
   // Configuración de salida
@@ -104,13 +115,19 @@ module.exports = {
        *
        * Ejemplo de uso en código:
        *   import ColorPicker from "colorPicker/ColorPicker";
+       *
+       * AMBIENTE DINÁMICO:
+       * - Desarrollo: http://localhost:3001/remoteEntry.js (via .env.local)
+       * - Producción: https://colorpicker-mf-colors-app.netlify.app/remoteEntry.js (default)
        */
       remotes: {
         colorPicker: `promise new Promise((resolve, reject) => {
-          const remoteHost = window.location.hostname || "localhost";
-          const remoteUrl = "http://" + remoteHost + ":3001/remoteEntry.js";
+          const remoteUrl = "${colorPickerUrl}";
+          console.log("[Module Federation] Cargando ColorPicker desde:", remoteUrl);
+          
           const script = document.createElement("script");
           script.src = remoteUrl;
+          
           script.onload = () => {
             if (!window.mf_colorpicker) {
               reject(new Error("Remote mf_colorpicker no disponible en " + remoteUrl));
@@ -129,6 +146,7 @@ module.exports = {
             };
             resolve(proxy);
           };
+          
           script.onerror = () => reject(new Error("Error cargando remoteEntry: " + remoteUrl));
           document.head.appendChild(script);
         })`

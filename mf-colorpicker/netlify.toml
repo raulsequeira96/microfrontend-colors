@@ -1,0 +1,87 @@
+# Configuración de Netlify - COLORPICKER MICROFRONTEND
+#
+# URL: https://colorpicker-mf-colors-app.netlify.app/
+
+[build]
+command = "npm install && npm run build"
+publish = "dist"
+functions = "functions"
+
+# Configuración del runtime de Node
+[build.environment]
+NODE_ENV = "production"
+NODE_VERSION = "18"
+
+[[headers]]
+# Aplicar a todos los recursos
+for = "/*"
+
+  [headers.values]
+  # CORS Abierto - Permitir solicitudes desde cualquier origen
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS"
+  Access-Control-Allow-Headers = "*"
+  Access-Control-Expose-Headers = "*"
+  
+  # Timing Allow Origin para performance monitoring
+  Timing-Allow-Origin = "*"
+  
+  # Permitir credenciales
+  Access-Control-Allow-Credentials = "false"
+  
+  # Cache headers - permitir cache pero validar
+  Cache-Control = "public, max-age=3600, must-revalidate"
+  
+  # Headers de seguridad básica (no restrictivos)
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options = "ALLOW-FROM *"
+  X-XSS-Protection = "1; mode=block"
+  Referrer-Policy = "no-referrer-when-downgrade"
+
+[[headers]]
+# Headers para archivos JavaScript/remoteEntry.js
+for = "/*.js"
+
+  [headers.values]
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "GET, HEAD, OPTIONS"
+  Access-Control-Allow-Headers = "*"
+  Access-Control-Expose-Headers = "*"
+  Content-Type = "application/javascript; charset=utf-8"
+  Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+# Headers para remoteEntry.js específicamente (Module Federation)
+for = "/remoteEntry.js"
+
+  [headers.values]
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "GET, HEAD, OPTIONS"
+  Access-Control-Allow-Headers = "*"
+  Access-Control-Expose-Headers = "*"
+  Content-Type = "application/javascript; charset=utf-8"
+  # No cachear remoteEntry.js para garantizar versión correcta
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+# Headers para CSS
+for = "/*.css"
+
+  [headers.values]
+  Access-Control-Allow-Origin = "*"
+  Content-Type = "text/css; charset=utf-8"
+  Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[redirects]]
+# Soporte de SPA: redirigir todas las rutas a index.html
+from = "/*"
+to = "/index.html"
+status = 200
+conditions = { Skip = "!{JoinedPath|/index.html}" }
+
+[[redirects]]
+# Permitir acceso a assets del microfrontend
+from = "/remoteEntry.js"
+to = "/remoteEntry.js"
+status = 200
+force = false

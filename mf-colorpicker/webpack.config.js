@@ -13,9 +13,13 @@
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+require("dotenv").config({ path: ".env.local" });
 
 // Cargar dependencias desde package.json para manejo de versiones
 const deps = require("./package.json").dependencies;
+
+const isDevelopment = process.env.NODE_ENV !== "production";
+console.log(`[COLORPICKER WEBPACK] Ambiente: ${isDevelopment ? "DESARROLLO" : "PRODUCCIÓN"}`);
 
 module.exports = {
   // Configuración de salida
