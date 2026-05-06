@@ -5,7 +5,6 @@
 [build]
 command = "npm install && npm run build"
 publish = "dist"
-functions = "functions"
 
 # Configuración del runtime de Node
 [build.environment]
@@ -73,16 +72,15 @@ for = "/*.css"
   Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[redirects]]
-# Soporte de SPA: redirigir todas las rutas a index.html
-from = "/*"
-to = "/index.html"
-status = 200
-conditions = { Skip = "!{JoinedPath|/index.html}" }
-
-[[redirects]]
 # Permitir acceso a microfront assets
 from = "/remoteEntry.js"
 to = "/remoteEntry.js"
 status = 200
 force = false
+
+[[redirects]]
+# Soporte de SPA: redirigir todas las rutas a index.html
+from = "/*"
+to = "/index.html"
+status = 200
 

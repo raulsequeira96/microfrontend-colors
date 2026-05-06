@@ -102,19 +102,22 @@ netlify sites:create --name colorpicker-mf-colors-app
 1. Ir a https://app.netlify.com/
 2. Conectar repositorio de GitHub
 3. Crear 2 sitios con las configs en los archivos `netlify.toml`
+	y el Base directory correcto para cada app
 
 ### 5. Configuración en Netlify
 
 **Para HOST (host-mf-colors-app):**
 - **Repository:** tu-repo
-- **Build Command:** `cd host && npm install && npm run build`
-- **Publish Directory:** `host/dist`
+- **Base directory:** `host`
+- **Build Command:** `npm install && npm run build`
+- **Publish Directory:** `dist`
 - **Environment:** `NODE_ENV=production`, `NODE_VERSION=18`
 
 **Para ColorPicker (colorpicker-mf-colors-app):**
 - **Repository:** tu-repo
-- **Build Command:** `cd mf-colorpicker && npm install && npm run build`
-- **Publish Directory:** `mf-colorpicker/dist`
+- **Base directory:** `mf-colorpicker`
+- **Build Command:** `npm install && npm run build`
+- **Publish Directory:** `dist`
 - **Environment:** `NODE_ENV=production`, `NODE_VERSION=18`
 
 ## 🧪 Verificación
@@ -147,7 +150,7 @@ Si ves error "mf_colorpicker is not available":
 ### CORS Error
 - NO debería haber CORS errors - están todos permitidos
 - Si ves error: borra cache del navegador y reload
-- Verifica que netlify.toml está en ambas carpetas
+- Verifica que netlify.toml esta en ambas carpetas
 
 ### Build Falla en Netlify
 - Verifica que `NODE_ENV=production` esté en Build Environment

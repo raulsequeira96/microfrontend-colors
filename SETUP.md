@@ -112,16 +112,18 @@ npm start:prod        # Dev server en modo producción
 ```
 Nombre del sitio: host-mf-colors-app
 Repositorio: tu-repo (rama main)
-Build command: cd host && npm install && npm run build
-Publish directory: host/dist
+Base directory: host
+Build command: npm install && npm run build
+Publish directory: dist
 ```
 
 **Para ColorPicker:**
 ```
 Nombre del sitio: colorpicker-mf-colors-app
 Repositorio: tu-repo (rama main)
-Build command: cd mf-colorpicker && npm install && npm run build
-Publish directory: mf-colorpicker/dist
+Base directory: mf-colorpicker
+Build command: npm install && npm run build
+Publish directory: dist
 ```
 
 #### 2. Configurar Variables de Entorno en Netlify
@@ -140,7 +142,7 @@ El despliegue se activa automáticamente con cada `push` a `main`.
 
 ## 🔐 Configuración CORS
 
-Los archivos `netlify.toml` incluyen:
+Los archivos `netlify.toml` de cada app incluyen:
 
 - ✅ CORS completamente abierto (`Access-Control-Allow-Origin: *`)
 - ✅ Todos los métodos HTTP permitidos
@@ -199,8 +201,7 @@ microfrontend-colors/
 │   ├── netlify.toml
 │   └── .env.example
 ├── dev.bat          # Script para Windows
-├── dev.sh           # Script para Linux/macOS
-└── netlify.toml     # Config global (opcional)
+└── dev.sh           # Script para Linux/macOS
 ```
 
 ## 🎓 Recursos
