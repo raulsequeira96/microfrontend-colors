@@ -9,7 +9,9 @@ publish = "dist"
 # Configuración del runtime de Node
 [build.environment]
 NODE_ENV = "production"
-NODE_VERSION = "18"
+NODE_VERSION = "20"
+NPM_CONFIG_PRODUCTION = "false"
+YARN_PRODUCTION = "false"
 
 [[headers]]
 # Aplicar a todos los recursos
