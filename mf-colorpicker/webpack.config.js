@@ -13,6 +13,7 @@
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const webpack = require("webpack");
 require("dotenv").config({ path: ".env.local" });
 
 // Cargar dependencias desde package.json para manejo de versiones
@@ -81,6 +82,10 @@ module.exports = {
 
   // Plugins de Webpack
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production"),
+      "process.env.PORT": JSON.stringify(process.env.PORT || ""),
+    }),
     /**
      * PLUGIN DE MODULE FEDERATION
      *
